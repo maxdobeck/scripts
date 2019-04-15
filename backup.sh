@@ -11,3 +11,6 @@ echo "Copied ~/.bash_aliases to ~/Backup"
 # Tar it
 tar -X ~/scripts/tar-exclude.txt -zcvf  /tmp/backup.tar.gz ~/Backup ~/ovpns ~/Pictures/Backgrounds  ~/Documents ~/scripts
 tput setaf 1; echo "/tmp/backup.tar.gz created"
+
+# scp to the media server
+scp /tmp/backup.tar.gz $LOCALMAIN_USER@$LOCALMAIN_SERVER:/home/mdobeck/media/backups
