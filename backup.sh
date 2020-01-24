@@ -9,21 +9,20 @@ echo "Copied ~/.bashrc file to ~/Backup"
 cp ~/.bash_aliases ~/Backup
 echo "Copied ~/.bash_aliases to ~/Backup"
 
+dirs=("Backup" "ovpns" "Pictures/Backgrounds" "Documents" "Music" "Audio/raw" "scripts")
 
+for dir in "${dirs[@]}"
+do
+    fn=$(echo "$dir" | tr / _)
+    tar -X ~/scripts/tar-exclude.txt -zcvf  /tmp/$fn.tar.gz ~/$dir
+    echo /tmp/$dir.tar.gz created
+done
 
-
-
-# Tar it
-tar -X ~/scripts/tar-exclude.txt -zcvf  /tmp/backup.tar.gz \
-~/Backup \
-~/ovpns \
-~/Pictures/Backgrounds \ 
-~/Documents \
-~/Music \
-~/Audio/raw \
-~/scripts
-tput setaf 1; echo "/tmp/backup.tar.gz created"
-
-# scp to the media server
-echo "moving /tmp/backup.tar.gz to $LOCALMAIN_SERVER"
-scp /tmp/backup.tar.gz $LOCALMAIN_USER@$LOCALMAIN_SERVER:/home/mdobeck/media/backups
+# scp the .tar files to the media server
+# this should be replaced by a python script
+for dir in "${dirs[@]}"
+do
+    fn=$(echo "$dir" | tr / _)
+    echo "moving /tmp/$fn.tar.gz to $LOCALMAIN_SERVER"
+    scp /tmp/$fn.tar.gz $LOCALMAIN_USER@$LOCALMAIN_SERVER:/home/mdobeck/media/backups
+done
