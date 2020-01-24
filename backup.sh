@@ -1,6 +1,7 @@
 #!/bin/bash
-# backup.sh script
-# max dobeck github.com/maxdobeck
+# backup.sh
+# max dobeck
+# github.com/maxdobeck
 
 # Copy stuff
 cp ~/.bashrc ~/Backup
