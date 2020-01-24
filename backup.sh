@@ -19,10 +19,12 @@ do
 done
 
 # scp the .tar files to the media server
-# this should be replaced by a python script
 for dir in "${dirs[@]}"
 do
     fn=$(echo "$dir" | tr / _)
     echo "moving /tmp/$fn.tar.gz to $LOCALMAIN_SERVER"
     scp /tmp/$fn.tar.gz $LOCALMAIN_USER@$LOCALMAIN_SERVER:/home/mdobeck/media/backups
 done
+
+# python script to upload to linode goes here
+# cheap to upload to raspberry pi locally.  expensive to go outside local network.
