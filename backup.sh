@@ -14,7 +14,7 @@ dirs=("Backup" "ovpns" "Pictures/Backgrounds" "Documents" "Music" "Audio/raw" "s
 for dir in "${dirs[@]}"
 do
     fn=$(echo "$dir" | tr / _)
-    tar -X ~/scripts/tar-exclude.txt -zcvf  /tmp/$fn.tar.gz ~/$dir
+    GZIP=-9 tar -X ~/scripts/tar-exclude.txt -zcvf  /tmp/$fn.tar.gz ~/$dir
     echo /tmp/$dir.tar.gz created
 done
 
@@ -26,5 +26,9 @@ do
     scp /tmp/$fn.tar.gz $LOCALMAIN_USER@$LOCALMAIN_SERVER:/home/mdobeck/media/backups
 done
 
-# python script to upload to linode goes here
-# cheap to upload to raspberry pi locally.  expensive to go outside local network.
+
+for dir in "${dirs[@]}"
+do
+    fn=$(echo "$dir" | tr / _)
+    linode-cli obj put /tmp/$fn.tar.gz $REMOTE_BACKUP
+done
