@@ -1,3 +1,5 @@
 pg_hba.conf
 *.tar.gz
 .git
+node_mod*
+dist/*

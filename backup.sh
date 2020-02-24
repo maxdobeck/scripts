@@ -9,7 +9,7 @@ echo "Copied ~/.bashrc file to ~/Backup"
 cp ~/.bash_aliases ~/Backup
 echo "Copied ~/.bash_aliases to ~/Backup"
 
-dirs=("Backup" "ovpns" "Pictures/Backgrounds" "Documents" "Music" "Audio/raw" "scripts")
+dirs=("Backup" "ovpns" "Pictures/Backgrounds" "Documents" "Music" "Audio/raw" "scripts" "cheatsheet_project")
 
 for dir in "${dirs[@]}"
 do
