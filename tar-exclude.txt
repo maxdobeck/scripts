@@ -3,3 +3,5 @@ pg_hba.conf
 .git
 node_mod*
 dist/*
+dist_electron/*
+target/*
